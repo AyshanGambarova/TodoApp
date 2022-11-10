@@ -3,7 +3,8 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-6">
-          <AddTask/>
+          <AddTask :task="task" />
+          <TaskList :task="task" @cleanInput='cleanInput'/>
         </div>
       </div>
     </div>
@@ -12,19 +13,34 @@
 
 <script>
 import AddTask from "./components/AddTask.vue";
+import TaskList from "./components/TaskList.vue";
 export default {
-  name: 'app',
-   components: { AddTask },
-  data () {
+  name: "app",
+  components: { AddTask, TaskList },
+  data() {
     return {
+      task: {
+        subject: "",
+        type: "",
+        status: false
+      }
+    };
+  },
+  methods: {
+    cleanInput() {
+      this.task = {
+        subject: "",
+        type: "",
+        status: false
+      };
     }
   }
-}
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -32,7 +48,8 @@ export default {
   margin-top: 60px;
 }
 
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 
